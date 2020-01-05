@@ -14,12 +14,11 @@ Make the script executable:
 Run the script at the head of whatever code directory you want, python, for example:
 ```shell
 cd ~/exercism/python
-~/scripts/exercism-note-maker/note_maker.sh
+~/scripts/exercism-note-maker/note_maker.sh python_notes.md .py
 ```
 And presto! You should have a markdown file titled notes.md in your ~/exercism/python folder.
 
 
 ### Current Limitations and Desired Changes
-1. Only works for .py files! Soon, user will pass desired extension as an argument to the script.
-2. Code blocks don't have syntax highlighting! Soon, script will print language name next to the code block.
-3. Is there any way I could get the different iterations of my code or the comments of my mentors? Hopefully one day! I've tried and failed to do this in python by scraping the exercism site, but I am still an amateur. )))
+1. Is there any way I could get the different iterations of my code or the comments of my mentors? Hopefully one day! I've tried and failed to do this in python by scraping the exercism site, but I am still an amateur. )))
+2. Currently, if the find command fails, the user isn't notified. I'm planning on fixing this.
