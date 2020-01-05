@@ -3,18 +3,28 @@ shopt -s extglob
 IFS=$'\n'
 set -f
 
+notebook_name=""
+file_extension=""
+language="${PWD##*/}"
+
+check_usage () {
+        case "$1" in
+                *.md) notebook_name="$1" ;;
+                *) echo "Usage: exercism-note-maker <notebook_name.md><track_file_extension>" ;;
+        esac
+        case "$2" in
+                .*) file_extension="$2" ;;
+                *) echo "Usage: exercism-note-maker <notebook_name.md><track_file_extension>" ;;
+        esac
+}
+
 main () {
-        current_dir="./"
-        touch notes.md ; chmod a=r, u+w notes.md
-        # Lists all files in current directory
-        for i in $( find "$current_dir" -maxdepth 2 -name '*.py' ! -name '*test*' ) ; do
+        check_usage "$@"
+        for i in $( find ./ -maxdepth 2 -name "*$file_extension" ! -name '*test*' ) ; do
                 {
-                        echo "$i" 
-                        echo "\`\`\`" ; cat "$i"
-                        echo "\`\`\`" 
-                } >> notes.md
+                        printf "###$i\n\`\`\`$language \n $(cat "$i") \`\`\` \n"
+                } >> "$notebook_name" 
         done
-        cat ./notes.md  
 }
 main "$@"
 
